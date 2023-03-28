@@ -9,14 +9,15 @@ import {User} from "./user.model";
 import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-role.model";
 import {RolesModule} from "../roles/roles.module";
-import {AppModule} from "../app.module";
+
 import {AuthModule} from "../auth/auth.module";
+import {Post} from "../posts/posts.model";
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
   imports: [
-      SequelizeModule.forFeature([User, Role, UserRoles]),// массив моделей
+      SequelizeModule.forFeature([User, Role, UserRoles, Post]),// массив моделей
       RolesModule,
       forwardRef(() => AuthModule)/* если не использовать форвард
      то будет кругова зависимость и выдаст ошибку */

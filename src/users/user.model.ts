@@ -1,8 +1,9 @@
-import {BelongsToMany, Column, DataType, HasOne, Model, Table} from "sequelize-typescript";
+import {BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger";
 import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-role.model";
 import {Profile} from "../profile/profile.model";
+import {Post} from "../posts/posts.model";
 
 interface USerCreationAttrs {
     email: string;
@@ -42,4 +43,8 @@ export class User extends Model<User, USerCreationAttrs> {
 
     @HasOne(() => Profile)
     userProfile: Profile;
+
+    //один пользователь можеть иметь много постов
+    @HasMany(() => Post)
+    posts: Post[]// храним их в массиве
 }

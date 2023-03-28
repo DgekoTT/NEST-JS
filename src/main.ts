@@ -1,6 +1,7 @@
 import {NestFactory} from "@nestjs/core";
 import {AppModule} from "./app.module";
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+import {ValidationPipe} from "./pipes/validation.pipe";
 
 
 async function start () {
@@ -19,7 +20,12 @@ async function start () {
   SwaggerModule.setup('/api/docs', app, document)
   /*app.useGlobalGuards(JwtAuthGuard) если его активировать то все ендпоинты
   будут проходить проверкуб можно добавлять несколько гвардов
+  ==========================================================================
+  app.useGlobalPipes(new ValidationPipe()) глобальное использование пайпа,
+  все ендпоинты будут проходить валидациюБ можоно использовать несколько вали
+  даторов
    */
+
 
   await app.listen(PORT, () => console.log(`Server is started on PORT = ${PORT} `))
 }

@@ -43,8 +43,8 @@ export class ProfileService {
     }
 
     async getProfileById(id: number) {
-        const ourId = await this.profileRepository.findOne({where: {id}});
-        return ourId;
+        const ourProfile = await this.profileRepository.findOne({where: {id}});
+        return ourProfile;
     }
 
     checkerProfile(candidate:any) {
