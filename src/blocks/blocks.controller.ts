@@ -21,7 +21,7 @@ import {RolesGuard} from "../auth/role.guard";
 @Controller('blocks')
 export class BlocksController {
 
-    // что бы был доступ к постсервис через зис
+
     constructor(private blockService: BlocksService) {
     }
 

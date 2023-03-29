@@ -20,7 +20,9 @@ export class BlocksService {
 
     async createBlocks(dto: CreateBlocksDto, image) {
         const fileName = await this.fileService.createFile(image);
-        const block = await this.blockRepository.create({...dto, image: fileName})
+        const block = await this.blockRepository.create({...dto, image: fileName});
+        //записываем файл в бд
+        const newFile = await this.fileService.createFileToDb(fileName, "Blocks", block.id)
         return block;
     }
 
@@ -35,14 +37,12 @@ export class BlocksService {
 
             success = await this.blockRepository.update({...dto, image: fileName},{
                 where: {
-                    // @ts-ignore
                     id: `${dto.id}`
                 }
             })
         } else {
              success = await this.blockRepository.update({...dto},{
                 where: {
-                    // @ts-ignore
                     id: `${dto.id}`
                 }
             })
@@ -55,7 +55,6 @@ export class BlocksService {
     }
 
     async getBlockById(id: number) {
-        // @ts-ignore
         const block = await this.blockRepository.findOne({where: {id}});
         return block;
 
@@ -70,17 +69,16 @@ export class BlocksService {
 
      async deleteBlock(id: number) {
          await this.checkerBlock(id);
-         // await this.fileService.deleteFile()
+         //удаляем файлы относящиеся к текст-блоку
+         await this.fileService.deleteFile("Blocks", id)
 
 
          const success = await this.blockRepository.destroy({
              where: {
-                 // @ts-ignore
                  id: `${id}`
              }
          })
          return success;
-
     }
 
     async getAllBlock() {

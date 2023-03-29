@@ -2,6 +2,7 @@ import { Column, DataType, Model, Table} from "sequelize-typescript";
 
 
 interface BlockCreationAttrs {
+    id: number;
     uniqueTitle: string;
     title: string;
     content: string;
