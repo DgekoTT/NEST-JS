@@ -6,6 +6,7 @@ import * as path from "path"
 import * as uuid from "uuid"
 import {InjectModel} from "@nestjs/sequelize";
 import {Files} from "./files.model";
+import {Op} from "sequelize";
 
 @Injectable()
 export class FilesService {
@@ -39,16 +40,35 @@ export class FilesService {
     }
 
     async deleteFile(essenceTable: string, essenceId: number ) {
-        const success = await this.filesRepository.destroy({
+        const delOk = await this.filesRepository.destroy({
             where: {
                 essenceId: `${essenceId}`,
                 essenceTable: `${essenceTable}`
             }
         });
-        return success;
+        return delOk;
     }
 
-    deleteUnUseFiles() {
+     async deleteUnUseFiles() {
+        const { Op } = require("sequelize");
+        const delFiles = await this.filesRepository.destroy({
+            where: {
+                [Op.or]: [
+                    { essenceId: null },
+                    { essenceTable:  null },
+                ],
+            },
 
+        });
+
+         const delFiles2 = await this.filesRepository.destroy({
+             where: {
+                 // @ts-ignore
+                 createdAt: {
+                 [Op.lt] : +new Date() - 3600000
+                 }
+             }
+        })
+     return delFiles2;
     }
 }

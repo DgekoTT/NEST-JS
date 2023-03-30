@@ -2,11 +2,14 @@ import {NestFactory} from "@nestjs/core";
 import {AppModule} from "./app.module";
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 import {ValidationPipe} from "./pipes/validation.pipe";
+import * as cookieParser from 'cookie-parser';
+
 
 
 async function start () {
   const PORT = process.env.PORT || 4050;
   const app = await NestFactory.create(AppModule);
+  app.use(cookieParser());
 
   //npm i @nestjs/swagger swagger-ui-express установка свагера
 
@@ -26,9 +29,8 @@ async function start () {
   даторов
    */
 
-
   await app.listen(PORT, () => console.log(`Server is started on PORT = ${PORT} `))
-}
 
+}
 
 start()

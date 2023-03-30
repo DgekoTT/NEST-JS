@@ -4,6 +4,7 @@ import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-role.model";
 import {Profile} from "../profile/profile.model";
 import {Post} from "../posts/posts.model";
+import {Token} from "../token/token.model";
 
 interface USerCreationAttrs {
     email: string;
@@ -47,4 +48,7 @@ export class User extends Model<User, USerCreationAttrs> {
     //один пользователь можеть иметь много постов
     @HasMany(() => Post)
     posts: Post[]// храним их в массиве
+
+    @HasOne(() => Token)
+    userToken: Token;
 }

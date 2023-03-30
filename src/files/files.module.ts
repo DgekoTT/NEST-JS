@@ -5,8 +5,10 @@ import { FilesService } from './files.service';
 import {SequelizeModule} from "@nestjs/sequelize";
 import {Files} from "./files.model";
 import {JwtModule} from "@nestjs/jwt";
+import {FilesController} from "./files.controller";
 
 @Module({
+  controllers: [FilesController],
   providers: [FilesService],
   exports: [FilesService],
   imports: [SequelizeModule.forFeature([Files]),

@@ -12,15 +12,18 @@ import {RolesModule} from "../roles/roles.module";
 
 import {AuthModule} from "../auth/auth.module";
 import {Post} from "../posts/posts.model";
+import {TokenModule} from "../token/token.module";
+import {Token} from "../token/token.model";
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
   imports: [
-      SequelizeModule.forFeature([User, Role, UserRoles, Post]),// массив моделей
+      SequelizeModule.forFeature([User, Role, UserRoles, Post, Token]),// массив моделей
       RolesModule,
-      forwardRef(() => AuthModule)/* если не использовать форвард
-     то будет кругова зависимость и выдаст ошибку */
+      TokenModule,
+      forwardRef(() => AuthModule)/* если не использовать форвард,
+      то будет круговая зависимость и выдаст ошибку */
   ],
     exports: [
         UsersService,

@@ -8,15 +8,17 @@ import { AuthService } from './auth.service';
 import {UsersModule} from "../users/users.module";
 import {JwtModule} from "@nestjs/jwt";
 import {ProfileModule} from "../profile/profile.module";
-import {ProfileService} from "../profile/profile.service";
+import {TokenModule} from "../token/token.module";
+
 
 @Module({
   controllers: [AuthController],
   providers: [AuthService],
   imports: [
+      TokenModule,
       ProfileModule,
       forwardRef(() => UsersModule) ,/* если не использовать форвард
-      то будет кругова зависимость и выдаст ошибку */
+      то будет круговая зависимость и выдаст ошибку */
       JwtModule.register({
         secret: process.env.PRIVATE_KEY || "SECRET",
           signOptions: {//время жизни токена
