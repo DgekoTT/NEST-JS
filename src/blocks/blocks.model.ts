@@ -8,7 +8,6 @@ interface BlockCreationAttrs {
     content: string;
     image: string;
     group: string;
-
 }
 
 @Table({tableName: 'blocks'})//появится таблица с именем blocks

@@ -71,4 +71,15 @@ export class FilesService {
         })
      return delFiles2;
     }
+
+    async getAllFilesByIdAndTable(table: string, essenceId: number) {
+        const files = this.filesRepository.findAll({
+            where: {
+                essenceId: `${essenceId}`,
+                essenceTable: `${table}`
+
+            }
+        })
+        return files;
+    }
 }
