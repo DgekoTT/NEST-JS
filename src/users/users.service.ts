@@ -55,4 +55,5 @@ export class UsersService {
         await user.save(); // сохраняем изменения в бд
         return user;
     }
+
 }

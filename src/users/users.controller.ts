@@ -1,6 +1,6 @@
 // этот модуль мы создали командой nest generate controller users
 
-import {Body, Controller, Get, Post, UseGuards, UsePipes} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, UseGuards, UsePipes} from '@nestjs/common';
 import {UsersService} from "./users.service";
 import {CreateUserDto} from "./dto/create-user.dto";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
@@ -58,4 +58,5 @@ export class UsersController {
     ban(@Body() dto: BanUserDto) {
         return this.userService.ban(dto);
     }
+
 }
