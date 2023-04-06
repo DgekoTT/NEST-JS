@@ -27,8 +27,8 @@ export class RolesController {
 
     @Roles("admin")
     @UseGuards(RolesGuard)
-    @Get('/all')
-    getAllRoles(){
+    @Get()
+    getAllRoles() {
         return this.roleService. getAllRoles();
     }
 }
