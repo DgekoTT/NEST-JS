@@ -22,12 +22,7 @@ export class RolesService {
     }
 
     async getAllRoles() {
-        const allRoles = await this.roleRepository.findAll({
-            include: {all: true},
-            where: {
-
-            }
-        });
+        const allRoles = await this.roleRepository.findAll();
         return allRoles;
     }
 }
